@@ -16,6 +16,8 @@ switch(action) {
     //Show last 20 tweets
     var client = new Twitter(keys.twitter)
     console.log(client)
+    // need to use count param - limit to 20.
+    // need to use q param (use @becca_kostyo - will look something like this: q=from%3ACmdr_Hadfield%20%23nasa&result_type=popular)
     break;
   case 'spotify-this-song':
     // Display this info about the song (argv[3] in terminal window:
