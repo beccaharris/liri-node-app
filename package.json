@@ -19,6 +19,9 @@
   "homepage": "https://github.com/beccaharris/liri-node-app#readme",
   "dependencies": {
     "fs": "0.0.1-security",
-    "request": "^2.85.0"
+    "moment": "^2.22.0",
+    "node-spotify-api": "^1.0.7",
+    "request": "^2.85.0",
+    "twitter": "^1.7.1"
   }
 }
