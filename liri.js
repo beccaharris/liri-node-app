@@ -1,11 +1,11 @@
 require('dotenv').config();
-var fs = require('fs');
-var keys = require('./keys.js');
-var Twitter = require('twitter');
-var Spotify = require('node-spotify-api');
-var moment = require('moment');
-var request = require('request');
-var textFile = ('./log.txt');
+const fs = require('fs');
+const keys = require('./keys.js');
+const Twitter = require('twitter');
+const Spotify = require('node-spotify-api');
+const moment = require('moment');
+const request = require('request');
+const textFile = ('./log.txt');
 var action = process.argv[2];
 var command3 = process.argv[3];
 
@@ -32,13 +32,10 @@ function grabTweets() {
   var params = { q: '@becca_kostyo', count: 20 };
   client.get('statuses/user_timeline', params, function (error, tweets, response) {
     if (!error) {
-      for (var i = 0; i < tweets.length; i++) {
+      for (let i = 0; i < tweets.length; i++) {
         var createdAtUnix = moment(new Date(tweets[i].created_at));
         var createdAtPretty = moment(createdAtUnix).format('MM/DD/YYYY @ hh:mma');
-        var tweetText = "Tweet: " + (parseInt([i]) + 1) + " of " + tweets.length +
-          "\nTweeted on " + createdAtPretty +
-          "\nText: " + tweets[i].text +
-          "\n---------------------\n";
+        var tweetText = `Tweet: ${(parseInt([i]) + 1)} of ${tweets.length} \nTweeted on ${createdAtPretty} \nText: ${tweets[i].text} \n---------------------\n`;
         console.log(tweetText);
         fs.appendFile(textFile, tweetText, function (err) {
           if (err) {
@@ -49,21 +46,17 @@ function grabTweets() {
     }
   })
 };
-// Grabs 1 song based on user params and returns song info. No song specified, looks up 'The Sign by' Ace of Base //
+// Grabs 2 songs based on user params and returns song info. No song specified, looks up 'The Sign by' Ace of Base //
 // -----------------------------------------------//
 function grabSong() {
   var spotify = new Spotify(keys.spotify);
   if (command3 != null) {
-    spotify.search({ type: 'track', query: command3, limit: 1 }, function (err, data) {
+    spotify.search({ type: 'track', query: command3, limit: 2 }, function (err, data) {
       if (err) {
         return console.log('Error occurred: ' + err);
       } else {
-        for (var i = 0; i < data.tracks.items.length; i++) {
-          var musicText = "Artist: " + data.tracks.items[i].artists[i].name +
-            "\nSong Name: " + data.tracks.items[i].name +
-            "\nPreview Link: " + data.tracks.items[i].preview_url +
-            "\nAlbum: " + data.tracks.items[i].album.name +
-            "\n------------------\n";
+        for (let i = 0; i < data.tracks.items.length; i++) {
+          var musicText = `Artist: ${data.tracks.items[i].artists[i].name} \nSong Name: ${data.tracks.items[i].name} \nPreview Link: ${data.tracks.items[i].preview_url} \nAlbum: ${data.tracks.items[i].album.name} \n------------------\n`;
           console.log(musicText);
           fs.appendFile(textFile, musicText, function (err) {
             if (err) {
@@ -75,11 +68,7 @@ function grabSong() {
     })
   } else {
     spotify.search({ type: 'track', query: 'Ace of Base Sign', limit: 1 }).then(function (data) {
-      var musicText = "Ace of Base...AGAIN:\nArtist: " + data.tracks.items[0].artists[0].name +
-        "\nSong Name: " + data.tracks.items[0].name +
-        "\nPreview Link: " + data.tracks.items[0].preview_url +
-        "\nAlbum: " + data.tracks.items[0].album.name +
-        "\n------------------\n";
+      var musicText = `Artist: ${data.tracks.items[0].artists[0].name} \nSong Name: ${data.tracks.items[0].name} \nPreview Link: ${data.tracks.items[0].preview_url} \nAlbum: ${data.tracks.items[0].album.name} \n------------------\n`;
       console.log(musicText);
       fs.appendFile(textFile, musicText, function (err) {
         if (err) {
@@ -93,18 +82,10 @@ function grabSong() {
 // -----------------------------------------------//
 function grabMovie() {
   if (command3 != null) {
-    request("http://www.omdbapi.com/?t=" + command3 + "&y=&plot=short&apikey=trilogy", function (error, response, body) {
+    request(`http://www.omdbapi.com/?t=${command3}&y=&plot=short&apikey=trilogy`, function (error, response, body) {
       if (!error && response.statusCode === 200) {
         var movie = JSON.parse(body);
-        var movieText = "Title: " + movie.Title +
-          "\nRelease Year: " + movie.Year +
-          "\nIMDB Rating: " + movie.imdbRating +
-          "\nRotten Tomatoes Rating: " + movie.Ratings[1].Value +
-          "\nProduced In: " + movie.Country +
-          "\nLanguage: " + movie.Language +
-          "\nPlot: " + movie.Plot +
-          "\nActors: " + movie.Actors +
-          "\n------------------\n";
+        var movieText = `Title: ${movie.Title} \nRelease Year: ${movie.Year} \nIMDB Rating: ${movie.imdbRating} \nRotten Tomatoes Rating: ${movie.Ratings[1].Value} \nProduced In: ${movie.Country} \nLanguage: ${movie.Language} \nPlot: ${movie.Plot} \nActors: ${movie.Actors} \n------------------\n`;
         console.log(movieText)
         fs.appendFile(textFile, movieText, function (err) {
           if (err) {
