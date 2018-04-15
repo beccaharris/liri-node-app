@@ -11,26 +11,27 @@ LIRI stands for language interpretation and recognition interface. In this app, 
 ## Getting Started
 ### Prerequisites
 - Clone repo to your computer
-- Run ```npm install`` in Terminal
-- Open project in terminal and run one of the following four commands described below:
+- Run npm install in Terminal
+- Open project in terminal and run one of the following four commands described below:<br/>
 1.```node liri.js my-tweets```<br/>
-This command will display my last 20 tweets as well as their created_at date.
+This command will display my last 20 tweets as well as their created_at date.<br/>
 2.```node liri.js spotify-this-song 'song name here'```<br/>
-This command will show the song artist, name, preview link, and album in your terminal. If no song is specified, it will default to "The Sign" by Ace of Base.
+This command will show the song artist, name, preview link, and album in your terminal. If no song is specified, it will default to "The Sign" by Ace of Base.<br/>
 3.```node liri.js movie-this 'movie title here'```<br/>
-This command will show the movie title, release year, IMDB rating, Rotten Tomatoes rating, production country, language, plot, and actors in your terminal. If no movie is specified, it will defaul to "Mr. Nobody."
+This command will show the movie title, release year, IMDB rating, Rotten Tomatoes rating, production country, language, plot, and actors in your terminal. If no movie is specified, it will defaul to "Mr. Nobody."<br/>
 4.```node liri.js do-what-it-says```<br/>
 This command will read the text from the ```random.txt``` file and will run the spotify-this-song command for the song. 
-**All commands will log the results t othe log.txt file.**
+<br/><br/>
+**All commands will log the results to the log.txt file.**
 
 ### Installing
 - Download the latest version of node to your computer. 
 - NPM packages:
--- **Twitter**: ``npm install twitter``
--- **Spotify**: ``npm install spotify``
--- **Request**: ``npm install request``
--- **FS**: ``npm install fs```
--- **Moment**: ```npm install moment```
+- **Twitter**: ```npm install twitter```
+- **Spotify**: ```npm install spotify```
+- **Request**: ```npm install request```
+- **FS**: ```npm install fs```
+- **Moment**: ```npm install moment```
 - **You will have to get your own Spotify and Twitter keys and put them into a .env file, or this app will not work!**
 
 ### Built With
